@@ -1,4 +1,4 @@
-# SkalaView DEMO: https://skalicky-test.cz/
+# SkalaView https://skalicky-test.cz/
 
 
 
