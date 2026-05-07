@@ -1,0 +1,60 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SkalaView.ViewModels"
+             x:Class="SkalaView.AppComponent.ToolbarMenu.ToolbarMenu"
+             x:DataType="vm:ToolbarMenuViewModel">
+
+    <UserControl.Styles>
+        <Style Selector="Button.toolbarButton">
+            <Setter Property="Background" Value="#0B1220"/>
+            <Setter Property="Foreground" Value="#E5E7EB"/>
+            <Setter Property="BorderBrush" Value="#1F2937"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="12,7"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="MinWidth" Value="46"/>
+        </Style>
+
+        <Style Selector="Button.toolbarButton:pointerover">
+            <Setter Property="Background" Value="#162033"/>
+            <Setter Property="Foreground" Value="#F8FAFC"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+        </Style>
+
+        <Style Selector="Button.toolbarButton:pressed">
+            <Setter Property="Background" Value="#1D4ED8"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#2563EB"/>
+        </Style>
+
+        <Style Selector="Button.toolbarButton /template/ ContentPresenter">
+            <Setter Property="Background" Value="{TemplateBinding Background}"/>
+            <Setter Property="Foreground" Value="{TemplateBinding Foreground}"/>
+            <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
+        </Style>
+
+        <Style Selector="Button.toolbarButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#162033"/>
+            <Setter Property="Foreground" Value="#F8FAFC"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+        </Style>
+
+        <Style Selector="Button.toolbarButton:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#1D4ED8"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#2563EB"/>
+        </Style>
+    </UserControl.Styles>
+
+    <StackPanel Orientation="Horizontal"
+                Spacing="8">
+        <Button Classes="toolbarButton" Content="1m" Command="{Binding SelectTimeframeCommand}" CommandParameter="1m"/>
+        <Button Classes="toolbarButton" Content="5m" Command="{Binding SelectTimeframeCommand}" CommandParameter="5m"/>
+        <Button Classes="toolbarButton" Content="15m" Command="{Binding SelectTimeframeCommand}" CommandParameter="15m"/>
+        <Button Classes="toolbarButton" Content="30m" Command="{Binding SelectTimeframeCommand}" CommandParameter="30m"/>
+        <Button Classes="toolbarButton" Content="1h" Command="{Binding SelectTimeframeCommand}" CommandParameter="1h"/>
+        <Button Classes="toolbarButton" Content="4h" Command="{Binding SelectTimeframeCommand}" CommandParameter="4h"/>
+        <Button Classes="toolbarButton" Content="1d" Command="{Binding SelectTimeframeCommand}" CommandParameter="1d"/>
+    </StackPanel>
+</UserControl>

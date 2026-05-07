@@ -1,0 +1,20 @@
+{
+  "name": "avalonia-application3-react-host",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build:avalonia": "powershell -ExecutionPolicy Bypass -File scripts/build-avalonia-web.ps1",
+    "dev": "vite --host 0.0.0.0",
+    "build": "npm run build:avalonia && vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.0.0",
+    "typescript": "^5.8.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {}
+}

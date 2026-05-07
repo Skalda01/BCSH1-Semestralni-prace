@@ -1,0 +1,41 @@
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #0b1220;
+  color: #f8fafc;
+  font-family: Inter, Arial, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.shell {
+  width: 100%;
+  height: 100%;
+  background: #0b1220;
+}
+
+.avalonia-root {
+  width: 100%;
+  height: 100%;
+}
+
+.status {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: #cbd5e1;
+  font-size: 16px;
+}

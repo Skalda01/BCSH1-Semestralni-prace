@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.12">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SkalaView\SkalaView.csproj" />
+  </ItemGroup>
+
+  <Target Name="KillRunningAppBeforeBuild" BeforeTargets="Build" Condition="'$(OS)' == 'Windows_NT'">
+    <Exec Command="cmd /c taskkill /F /IM SkalaView.Desktop.exe /T &gt;nul 2&gt;&amp;1 || exit /b 0" />
+  </Target>
+</Project>

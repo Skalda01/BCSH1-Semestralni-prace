@@ -1,0 +1,231 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SkalaView.ViewModels"
+             x:Class="SkalaView.AppComponent.IndicatorMenu.IndicatorMenu"
+             x:DataType="vm:IndicatorMenuViewModel">
+
+    <Border CornerRadius="20"
+            Background="#111827"
+            BorderBrush="#1F2937"
+            BorderThickness="1"
+            Padding="14">
+        <StackPanel Spacing="12">
+            <Grid ColumnDefinitions="*,Auto"
+                  ColumnSpacing="10">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="{Binding SymbolText}"
+                               Foreground="#F8FAFC"
+                               FontSize="15"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding StatusText}"
+                               Foreground="#7DD3FC"
+                               FontSize="10.5"/>
+                </StackPanel>
+
+                <Border Grid.Column="1"
+                        Background="#052E2B"
+                        BorderBrush="#0F766E"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Padding="8,4"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="LIVE"
+                               Foreground="#5EEAD4"
+                               FontSize="10"
+                               FontWeight="SemiBold"/>
+                </Border>
+            </Grid>
+
+            <Border Background="#0B1220"
+                    BorderBrush="#1F2937"
+                    BorderThickness="1"
+                    CornerRadius="14"
+                    Padding="12">
+                <Grid RowDefinitions="Auto,Auto"
+                      RowSpacing="7">
+                    <TextBlock Text="Last price"
+                               Foreground="#94A3B8"
+                               FontSize="10.5"
+                               FontWeight="SemiBold"/>
+
+                    <Grid Grid.Row="1"
+                          ColumnDefinitions="*,Auto"
+                          ColumnSpacing="10">
+                        <TextBlock Text="{Binding LastPriceText}"
+                                   Foreground="#F8FAFC"
+                                   FontSize="25"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis"/>
+                        <StackPanel Grid.Column="1"
+                                    Spacing="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right">
+                            <TextBlock Text="{Binding PriceChangePercentText}"
+                                       Foreground="{Binding ChangeBrush}"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       TextAlignment="Right"/>
+                            <TextBlock Text="{Binding PriceChangeText}"
+                                       Foreground="{Binding ChangeBrush}"
+                                       FontSize="11"
+                                       TextAlignment="Right"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border Background="#0B1220"
+                    BorderBrush="#1F2937"
+                    BorderThickness="1"
+                    CornerRadius="14"
+                    Padding="12">
+                <Grid RowDefinitions="Auto,Auto,Auto"
+                      RowSpacing="8">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBlock Text="Daily range"
+                                   Foreground="#94A3B8"
+                                   FontSize="10.5"
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding RangeText}"
+                                   Foreground="#CBD5E1"
+                                   FontSize="10.5"
+                                   FontWeight="SemiBold"/>
+                    </Grid>
+
+                    <ProgressBar Grid.Row="1"
+                                 Minimum="0"
+                                 Maximum="100"
+                                 Value="{Binding RangePosition}"
+                                 Height="8"
+                                 Background="#1F2937"
+                                 Foreground="#38BDF8"
+                                 CornerRadius="4"/>
+
+                    <Grid Grid.Row="2"
+                          ColumnDefinitions="*,Auto">
+                        <TextBlock Text="Weighted avg"
+                                   Foreground="#64748B"
+                                   FontSize="10.5"/>
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding WeightedAveragePriceText}"
+                                   Foreground="#F8FAFC"
+                                   FontSize="11.5"
+                                   FontWeight="SemiBold"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <UniformGrid Columns="2"
+                         Rows="3">
+                <Border Background="#0B1220"
+                        BorderBrush="#1F2937"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="10"
+                        Margin="0,0,6,8">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Open"
+                                   Foreground="#64748B"
+                                   FontSize="10"/>
+                        <TextBlock Text="{Binding OpenPriceText}"
+                                   Foreground="#E5E7EB"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#0B1220"
+                        BorderBrush="#1F2937"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="10"
+                        Margin="6,0,0,8">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="High"
+                                   Foreground="#64748B"
+                                   FontSize="10"/>
+                        <TextBlock Text="{Binding HighPriceText}"
+                                   Foreground="#34D399"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#0B1220"
+                        BorderBrush="#1F2937"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="10"
+                        Margin="0,0,6,8">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Low"
+                                   Foreground="#64748B"
+                                   FontSize="10"/>
+                        <TextBlock Text="{Binding LowPriceText}"
+                                   Foreground="#F87171"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#0B1220"
+                        BorderBrush="#1F2937"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="10"
+                        Margin="6,0,0,8">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Volume"
+                                   Foreground="#64748B"
+                                   FontSize="10"/>
+                        <TextBlock Text="{Binding VolumeText}"
+                                   Foreground="#7DD3FC"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#0B1220"
+                        BorderBrush="#1F2937"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="10"
+                        Margin="0,0,6,0">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Quote volume"
+                                   Foreground="#64748B"
+                                   FontSize="10"/>
+                        <TextBlock Text="{Binding QuoteVolumeText}"
+                                   Foreground="#A5B4FC"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#0B1220"
+                        BorderBrush="#1F2937"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="10"
+                        Margin="6,0,0,0">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Trades"
+                                   Foreground="#64748B"
+                                   FontSize="10"/>
+                        <TextBlock Text="{Binding TradeCountText}"
+                                   Foreground="#E5E7EB"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+        </StackPanel>
+    </Border>
+</UserControl>

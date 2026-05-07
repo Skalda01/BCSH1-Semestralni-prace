@@ -1,0 +1,288 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SkalaView.AppComponent.TickerMenu"
+             xmlns:vm="using:SkalaView.ViewModels"
+             x:Class="SkalaView.AppComponent.TickerMenu.TickerMenu"
+             x:DataType="vm:TickerMenuViewModel">
+
+    <Border Width="380"
+            Padding="16"
+            Background="#111827"
+            BorderBrush="#1F2937"
+            BorderThickness="1"
+            CornerRadius="20">
+
+        <Border.Styles>
+            <Style Selector="TextBox.tickerInput">
+                <Setter Property="Background" Value="#0B1220"/>
+                <Setter Property="Foreground" Value="#E5E7EB"/>
+                <Setter Property="CaretBrush" Value="#E5E7EB"/>
+                <Setter Property="SelectionBrush" Value="#2563EB"/>
+                <Setter Property="BorderBrush" Value="#1F2937"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="10,7"/>
+                <Setter Property="FontSize" Value="11"/>
+            </Style>
+
+            <Style Selector="TextBox.tickerInput:pointerover">
+                <Setter Property="Background" Value="#0B1220"/>
+                <Setter Property="Foreground" Value="#E5E7EB"/>
+                <Setter Property="BorderBrush" Value="#334155"/>
+            </Style>
+
+            <Style Selector="TextBox.tickerInput:focus">
+                <Setter Property="Background" Value="#0B1220"/>
+                <Setter Property="Foreground" Value="#F8FAFC"/>
+                <Setter Property="BorderBrush" Value="#2563EB"/>
+            </Style>
+
+            <Style Selector="TextBox.tickerInput /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="#0B1220"/>
+                <Setter Property="BorderBrush" Value="#1F2937"/>
+            </Style>
+
+            <Style Selector="TextBox.tickerInput:pointerover /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="#0B1220"/>
+                <Setter Property="BorderBrush" Value="#334155"/>
+            </Style>
+
+            <Style Selector="TextBox.tickerInput:focus /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="#0B1220"/>
+                <Setter Property="BorderBrush" Value="#2563EB"/>
+            </Style>
+
+            <Style Selector="TextBox.tickerInput /template/ TextPresenter#PART_TextPresenter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+            <Style Selector="Button.tickerButton">
+                <Setter Property="Background" Value="#0B1220"/>
+                <Setter Property="Foreground" Value="#E5E7EB"/>
+                <Setter Property="BorderBrush" Value="#1F2937"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="12,7"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
+
+            <Style Selector="Button.tickerButton:pointerover">
+                <Setter Property="Background" Value="#162033"/>
+                <Setter Property="Foreground" Value="#F8FAFC"/>
+                <Setter Property="BorderBrush" Value="#334155"/>
+            </Style>
+
+            <Style Selector="Button.tickerButton:pressed">
+                <Setter Property="Background" Value="#1D4ED8"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+                <Setter Property="BorderBrush" Value="#2563EB"/>
+            </Style>
+
+            <Style Selector="Button.tickerButton /template/ ContentPresenter">
+                <Setter Property="Background" Value="{TemplateBinding Background}"/>
+                <Setter Property="Foreground" Value="{TemplateBinding Foreground}"/>
+                <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
+            </Style>
+
+            <Style Selector="Button.tickerButton:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="#162033"/>
+                <Setter Property="Foreground" Value="#F8FAFC"/>
+                <Setter Property="BorderBrush" Value="#334155"/>
+            </Style>
+
+            <Style Selector="Button.tickerButton:pressed /template/ ContentPresenter">
+                <Setter Property="Background" Value="#1D4ED8"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+                <Setter Property="BorderBrush" Value="#2563EB"/>
+            </Style>
+        </Border.Styles>
+
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+              RowSpacing="12">
+
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Watchlist"
+                               Foreground="#E5E7EB"
+                               FontSize="16"
+                               FontWeight="SemiBold"/>
+                    <TextBlock Text="Market overview"
+                               Foreground="#94A3B8"
+                               FontSize="11"/>
+                </StackPanel>
+
+                <Border Grid.Column="1"
+                        Background="#0B1220"
+                        BorderBrush="#1F2937"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Padding="8,4"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Tickers.Count, StringFormat={}#{0}}"
+                               Foreground="#93C5FD"
+                               FontSize="11"
+                               FontWeight="SemiBold"/>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*,Auto"
+                  ColumnSpacing="8">
+                <TextBox Classes="tickerInput"
+                         Text="{Binding ApiToken, Mode=TwoWay}"
+                         Watermark="API token"/>
+                <Button Grid.Column="1"
+                        Classes="tickerButton"
+                        Content="Connect"
+                        Command="{Binding ConnectCommand}"/>
+            </Grid>
+
+            <Grid Grid.Row="2"
+                  ColumnDefinitions="*,Auto,Auto"
+                  ColumnSpacing="8">
+                <TextBox Classes="tickerInput"
+                         Text="{Binding AddTickerSymbol, Mode=TwoWay}"
+                         Watermark="Ticker symbol"/>
+                <Button Grid.Column="1"
+                        Classes="tickerButton"
+                        Content="Add"
+                        Command="{Binding AddTickerCommand}"/>
+                <Button Grid.Column="2"
+                        Classes="tickerButton"
+                        Content="Remove"
+                        Command="{Binding RemoveSelectedTickerCommand}"/>
+            </Grid>
+
+            <TextBlock Grid.Row="3"
+                       Text="{Binding StatusMessage}"
+                       Foreground="#94A3B8"
+                       FontSize="10.5"
+                       TextTrimming="CharacterEllipsis"
+                       MaxLines="1"/>
+
+            <ListBox Grid.Row="4"
+                     ItemsSource="{Binding Tickers}"
+                     SelectedItem="{Binding SelectedTicker, Mode=TwoWay}"
+                     Background="Transparent"
+                     BorderThickness="0">
+
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="10,12"/>
+                        <Setter Property="Margin" Value="0,0,0,10"/>
+                        <Setter Property="CornerRadius" Value="14"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="MinHeight" Value="92"/>
+                        <Setter Property="Background" Value="#0B1220"/>
+                        <Setter Property="BorderBrush" Value="#1F2937"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+
+                    <Style Selector="ListBoxItem:pointerover">
+                        <Setter Property="Background" Value="#162033"/>
+                        <Setter Property="BorderBrush" Value="#334155"/>
+                    </Style>
+
+                    <Style Selector="ListBoxItem:selected">
+                        <Setter Property="Background" Value="#14213D"/>
+                        <Setter Property="BorderBrush" Value="#2563EB"/>
+                    </Style>
+                </ListBox.Styles>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="local:TickerItem">
+                        <Grid ColumnDefinitions="76,*,102"
+                              RowDefinitions="Auto,Auto,Auto,Auto"
+                              ColumnSpacing="12"
+                              RowSpacing="4">
+
+                            <Border Grid.RowSpan="4"
+                                    Background="#0E1628"
+                                    BorderBrush="#1F2937"
+                                    BorderThickness="1"
+                                    CornerRadius="10"
+                                    Padding="6,2"
+                                    MinHeight="58">
+                                <TextBlock Text="{Binding Symbol}"
+                                           Foreground="#DBEAFE"
+                                           FontSize="12"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           TextAlignment="Center"
+                                           TextTrimming="CharacterEllipsis"
+                                           MaxLines="1"/>
+                            </Border>
+
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding DisplayName}"
+                                       Foreground="#F8FAFC"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       TextTrimming="CharacterEllipsis"
+                                       MaxLines="1"/>
+
+                            <TextBlock Grid.Column="2"
+                                       Text="{Binding PriceText}"
+                                       Foreground="#F8FAFC"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Right"
+                                       TextAlignment="Right"
+                                       TextTrimming="CharacterEllipsis"
+                                       MaxLines="1"/>
+
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="{Binding Exchange}"
+                                       Foreground="#94A3B8"
+                                       FontSize="11"
+                                       TextTrimming="CharacterEllipsis"
+                                       MaxLines="1"/>
+
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       Text="{Binding ChangeText}"
+                                       FontSize="12"
+                                       Foreground="{Binding ChangeBrush}"
+                                       HorizontalAlignment="Right"
+                                       TextAlignment="Right"
+                                       FontWeight="SemiBold"
+                                       TextTrimming="CharacterEllipsis"
+                                       MaxLines="1"/>
+
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2"
+                                       Text="{Binding DayRangeText}"
+                                       Foreground="#94A3B8"
+                                       FontSize="10.5"
+                                       TextTrimming="CharacterEllipsis"
+                                       MaxLines="1"/>
+
+                            <Grid Grid.Row="3"
+                                  Grid.Column="1"
+                                  Grid.ColumnSpan="2"
+                                  ColumnDefinitions="*,*"
+                                  ColumnSpacing="10"
+                                  Margin="0,2,0,0">
+                                <TextBlock Text="{Binding VolumeText}"
+                                           Foreground="#7DD3FC"
+                                           FontSize="10.5"
+                                           TextTrimming="CharacterEllipsis"
+                                           MaxLines="1"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding MarketCapText}"
+                                           Foreground="#A5B4FC"
+                                           FontSize="10.5"
+                                           TextAlignment="Right"
+                                           TextTrimming="CharacterEllipsis"
+                                           MaxLines="1"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:chartMenu="using:SkalaView.AppComponent.ChartMenu"
+             xmlns:indicatorMenu="using:SkalaView.AppComponent.IndicatorMenu"
+             xmlns:orderBook="using:SkalaView.AppComponent.OrderBook"
+             xmlns:tickerMenu="using:SkalaView.AppComponent.TickerMenu"
+             xmlns:toolbarMenu="using:SkalaView.AppComponent.ToolbarMenu"
+             xmlns:tradeMenu="using:SkalaView.AppComponent.TradeMenu"
+             xmlns:vm="using:SkalaView.ViewModels"
+             x:Class="SkalaView.MainView"
+             x:DataType="vm:MainViewModel"
+             Background="#0B1220">
+
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#111827"/>
+            <Setter Property="Foreground" Value="#E5E7EB"/>
+            <Setter Property="BorderBrush" Value="#1F2937"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style Selector="Button:pointerover">
+            <Setter Property="Background" Value="#172033"/>
+            <Setter Property="BorderBrush" Value="#334155"/>
+        </Style>
+    </UserControl.Styles>
+    <Grid Margin="18" RowDefinitions="Auto,*" ColumnDefinitions="Auto,3*,1*" RowSpacing="14" ColumnSpacing="14">
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#111827" BorderBrush="#1F2937" BorderThickness="1" CornerRadius="16" Padding="12,10">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <StackPanel Spacing="2">
+                    <TextBlock Text="Crypto Dashboard" Foreground="#F8FAFC" FontSize="17" FontWeight="SemiBold"/>
+                    <TextBlock Text="Realtime technical analysis workspace" Foreground="#94A3B8" FontSize="11"/>
+                </StackPanel>
+                <toolbarMenu:ToolbarMenu Grid.Column="1" DataContext="{Binding ToolbarMenu}"/>
+            </Grid>
+        </Border>
+        <tickerMenu:TickerMenu Grid.Row="1" Grid.Column="0" DataContext="{Binding TickerMenu}"/>
+        <Border Grid.Row="1" Grid.Column="1" CornerRadius="20" Background="#111827" BorderBrush="#1F2937" BorderThickness="1" Padding="12">
+            <chartMenu:ChartMenu DataContext="{Binding Chart}"/>
+        </Border>
+        <Grid Grid.Row="1" Grid.Column="2" RowDefinitions="3*,2*" RowSpacing="12">
+            <indicatorMenu:IndicatorMenu Grid.Row="0" DataContext="{Binding IndicatorMenu}"/>
+            <orderBook:OrderBook Grid.Row="1" DataContext="{Binding OrderBook}"/>
+        </Grid>
+    </Grid>
+</UserControl>

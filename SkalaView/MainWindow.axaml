@@ -1,0 +1,10 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:SkalaView"
+        x:Class="SkalaView.MainWindow"
+        Width="1920"
+        Height="1080"
+        Title="Crypto Dashboard"
+        Background="#0B1220">
+    <local:MainView/>
+</Window>

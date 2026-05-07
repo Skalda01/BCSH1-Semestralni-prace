@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.3.12"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.12"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.12"/>
+        <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-rc6.1" />
+        <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.9.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\settings_24dp_000000_FILL0_wght400_GRAD0_opsz24.png" />
+      <None Remove="Assets\AAPL_1h_2025_2026.csv" />
+      <None Remove="Assets\AAPL_4h_data.csv" />
+      <None Remove="Assets\amd_icon.svg" />
+      <None Remove="Assets\ORCL_4H_data.csv" />
+      <None Remove="Assets\NVDA_4H_data.csv" />
+      <None Remove="Assets\MSFT_4H_data.csv" />
+      <None Remove="Assets\META_4H_data.csv" />
+      <None Remove="Assets\GOOG_4H_data.csv" />
+      <None Remove="Assets\AMZN_4H_data.csv" />
+      <None Remove="Assets\AMD_4H_data.csv" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="server js\**\*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="appComponent\tickerMenu\TickerMenu.axaml.cs">
+        <DependentUpon>TickerMenu.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="appComponent\chartMenu\ChartMenu.axaml.cs">
+        <DependentUpon>ChartMenu.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="appComponent\indicatorMenu\IndicatorMenu.axaml.cs">
+        <DependentUpon>IndicatorMenu.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="appComponent\orderBook\OrderBook.axaml.cs">
+        <DependentUpon>OrderBook.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="appComponent\toolbarMenu\ToolbarMenu.axaml.cs">
+        <DependentUpon>ToolbarMenu.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="appComponent\tradeMenu\TradeMenu.axaml.cs">
+        <DependentUpon>TradeMenu.axaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ViewModels\" />
+    </ItemGroup>
+</Project>
