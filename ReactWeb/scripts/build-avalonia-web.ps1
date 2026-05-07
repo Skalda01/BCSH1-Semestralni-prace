@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 
 $reactRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 $repoRoot = Resolve-Path (Join-Path $reactRoot "..")
-$browserProject = Join-Path $repoRoot "AvaloniaApplication3.Browser\AvaloniaApplication3.Browser.csproj"
-$browserRoot = Join-Path $repoRoot "AvaloniaApplication3.Browser"
+$browserProject = Join-Path $repoRoot "SkalaView.Browser\SkalaView.Browser.csproj"
+$browserRoot = Join-Path $repoRoot "SkalaView.Browser"
 $target = Join-Path $reactRoot "public\avalonia"
 
 dotnet publish $browserProject -c Release
