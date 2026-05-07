@@ -1,4 +1,6 @@
-# SkalaView
+# SkalaView DEMO: https://skalicky-test.cz/
+
+
 
 SkalaView je multiplatformní aplikace pro sledování kryptoměnových trhů. Projekt kombinuje sdílené Avalonia UI, desktopovou aplikaci, browser/WASM variantu a React/Vite webový host.
 
