@@ -1,50 +1,50 @@
 # SkalaView
 
-SkalaView je multiplatformni aplikace pro sledovani kryptomenovych trhu. Projekt kombinuje sdilene Avalonia UI, desktopovou aplikaci, browser/WASM variantu a React/Vite webovy host.
+SkalaView je multiplatformní aplikace pro sledování kryptoměnových trhů. Projekt kombinuje sdílené Avalonia UI, desktopovou aplikaci, browser/WASM variantu a React/Vite webový host.
 
-Aplikace je zamerena na prakticky trading dashboard: dynamicky watchlist, live trzni data, svickovy graf, indikatorovy panel a order book pro aktualne vybrany symbol.
+Aplikace je zaměřená na praktický trading dashboard: dynamický watchlist, živá tržní data, svíčkový graf, indikátorový panel a order book pro aktuálně vybraný symbol.
 
-## Klicove funkce
+## Klíčové funkce
 
 | Funkce | Popis |
 | --- | --- |
-| Dynamicky watchlist | Uzivatel se pripoji pomoci API tokenu a aplikace nacte jeho serverovy watchlist. Tickery lze pridavat a odebirat primo z aplikace. |
-| Overeni API tokenu | Token se posila na backend jako `Bearer` token. Po uspesnem overeni backend vrati watchlist navazany na dany token. |
-| Live ticker prehled | Watchlist se pravidelne aktualizuje o cenu, denni zmenu, low/high, objem a quote volume z Binance API. |
-| Svickovy graf | Graf nacita OHLCV data z Binance klines endpointu a reaguje na zmenu tickeru i timeframe. |
-| Indikatorovy panel | Live statistiky pro aktivni symbol prichazi pres Binance WebSocket ticker stream. |
-| Order book | Hloubka trhu se nacita pres Binance WebSocket depth stream. |
-| Sdilene UI | Jedno Avalonia UI jadro se pouziva pro desktopovou i browser variantu. |
+| Dynamický watchlist | Uživatel se připojí pomocí API tokenu a aplikace načte jeho serverový watchlist. Tickery lze přidávat a odebírat přímo z aplikace. |
+| Ověření API tokenu | Token se posílá na backend jako `Bearer` token. Po úspěšném ověření backend vrátí watchlist navázaný na daný token. |
+| Live ticker přehled | Watchlist se pravidelně aktualizuje o cenu, denní změnu, low/high, objem a quote volume z Binance API. |
+| Svíčkový graf | Graf načítá OHLCV data z Binance klines endpointu a reaguje na změnu tickeru i timeframe. |
+| Indikátorový panel | Live statistiky pro aktivní symbol přicházejí přes Binance WebSocket ticker stream. |
+| Order book | Hloubka trhu se načítá přes Binance WebSocket depth stream. |
+| Sdílené UI | Jedno Avalonia UI jádro se používá pro desktopovou i browser variantu. |
 
 ## Architektura projektu
 
 ```text
 SkalaView.sln
-|-- SkalaView/              Sdilene Avalonia UI, viewmodely a API servisy
-|-- SkalaView.Desktop/      Desktopovy vstupni projekt
-|-- SkalaView.Browser/      Browser/WASM vstupni projekt
+|-- SkalaView/              Sdílené Avalonia UI, viewmodely a API servisy
+|-- SkalaView.Desktop/      Desktopový vstupní projekt
+|-- SkalaView.Browser/      Browser/WASM vstupní projekt
 |-- ReactWeb/               React + Vite host pro browser verzi
 `-- global.json             Konfigurace .NET SDK
 ```
 
-### Sdilena aplikacni vrstva
+### Sdílená aplikační vrstva
 
-Projekt `SkalaView` obsahuje hlavni UI, viewmodely a komunikaci s externimi API. Sdileny stav aplikace drzi `SharedViewModel`, hlavne vybrany ticker a timeframe. Diky tomu se po zmene tickeru synchronne prepina graf, indikatory i order book.
+Projekt `SkalaView` obsahuje hlavní UI, viewmodely a komunikaci s externími API. Sdílený stav aplikace drží `SharedViewModel`, hlavně vybraný ticker a timeframe. Díky tomu se po změně tickeru synchronně přepíná graf, indikátory i order book.
 
-Dulezite casti:
+Důležité části:
 
-- `TickerMenuViewModel` resi API token, serverovy watchlist a pravidelny refresh ticker snapshotu.
-- `CandlestickChartViewModel` nacita svickova data pro aktualni symbol a timeframe.
+- `TickerMenuViewModel` řeší API token, serverový watchlist a pravidelný refresh ticker snapshotů.
+- `CandlestickChartViewModel` načítá svíčková data pro aktuální symbol a timeframe.
 - `IndicatorMenuViewModel` spravuje live ticker stream.
 - `OrderBookViewModel` spravuje live order book stream.
 - `UserWatchlistApiService` komunikuje s backendem pro token a watchlist.
-- `Binance*ApiService` tridy oddeluji praci s Binance REST a WebSocket API od UI logiky.
+- `Binance*ApiService` třídy oddělují práci s Binance REST a WebSocket API od UI logiky.
 
 ## API token a watchlist
 
-Watchlist neni pevne zapsany v klientovi. Po spusteni aplikace se zobrazi vychozi tickery, ale po zadani API tokenu aplikace zavola backend a nacte watchlist uzivatele.
+Watchlist není pevně zapsaný v klientovi. Po spuštění aplikace se zobrazí výchozí tickery, ale po zadání API tokenu aplikace zavolá backend a načte watchlist uživatele.
 
-Klient pouziva backend endpointy:
+Klient používá backend endpointy:
 
 ```text
 POST   /api/app/validate-token
@@ -52,13 +52,13 @@ POST   /api/app/watchlist
 DELETE /api/app/watchlist/{symbol}
 ```
 
-Token se posila v HTTP hlavicce:
+Token se posílá v HTTP hlavičce:
 
 ```http
 Authorization: Bearer <api-token>
 ```
 
-Aktualni base URL je nastavene v `SkalaView/apiService/UserWatchlistApiService.cs`:
+Aktuální base URL je nastavené v `SkalaView/apiService/UserWatchlistApiService.cs`:
 
 ```text
 https://skalicky-test.cz/backend/api/app
@@ -66,25 +66,25 @@ https://skalicky-test.cz/backend/api/app
 
 Tok v aplikaci:
 
-1. Uzivatel zada API token.
-2. Klient zavola `validate-token`.
-3. Backend overi token a vrati watchlist.
-4. Aplikace nahradi lokalni seznam tickeru serverovym watchlistem.
-5. Pridani nebo odebrani tickeru se posila na backend.
-6. Backend vraci aktualizovany watchlist, ktery se znovu propise do UI.
+1. Uživatel zadá API token.
+2. Klient zavolá `validate-token`.
+3. Backend ověří token a vrátí watchlist.
+4. Aplikace nahradí lokální seznam tickerů serverovým watchlistem.
+5. Přidání nebo odebrání tickeru se posílá na backend.
+6. Backend vrací aktualizovaný watchlist, který se znovu propíše do UI.
 
-Tento pristup drzi watchlist per-user/per-token na serveru a klient zustava bez persistentni lokalni databaze watchlistu.
+Tento přístup drží watchlist per-user/per-token na serveru a klient zůstává bez persistentní lokální databáze watchlistu.
 
-## Trzni data
+## Tržní data
 
-| Cast aplikace | Zdroj dat | Detail |
+| Část aplikace | Zdroj dat | Detail |
 | --- | --- | --- |
-| Watchlist ticker data | Binance REST API | Aktualni cena, zmena, low/high, volume a quote volume. |
-| Svickovy graf | Binance REST API `/api/v3/klines` | Poslednich 300 svicek pro vybrany symbol a timeframe. |
-| Indikatory | Binance WebSocket `@ticker` | Live statistiky aktivniho symbolu. |
+| Watchlist ticker data | Binance REST API | Aktuální cena, změna, low/high, volume a quote volume. |
+| Svíčkový graf | Binance REST API `/api/v3/klines` | Posledních 300 svíček pro vybraný symbol a timeframe. |
+| Indikátory | Binance WebSocket `@ticker` | Live statistiky aktivního symbolu. |
 | Order book | Binance WebSocket `@depth20@100ms` | Live bid/ask hloubka trhu. |
 
-Symboly se normalizuji na Binance format. Pokud uzivatel zada napr. `BTC`, API servis pracuje s parem `BTCUSDT`.
+Symboly se normalizují na Binance formát. Pokud uživatel zadá například `BTC`, API servis pracuje s párem `BTCUSDT`.
 
 ## Technologie
 
@@ -97,14 +97,14 @@ Symboly se normalizuji na Binance format. Pokud uzivatel zada napr. `BTC`, API s
 - Binance REST API
 - Binance WebSocket API
 
-## Pozadavky
+## Požadavky
 
 - .NET SDK 8.0
 - Node.js a npm
-- PowerShell pro build script webove Avalonia casti
-- Visual Studio 2022 nebo JetBrains Rider pro pohodlny vyvoj
+- PowerShell pro build script webové Avalonia části
+- Visual Studio 2022 nebo JetBrains Rider pro pohodlný vývoj
 
-Projekt obsahuje `global.json` s .NET SDK `8.0.124` a `rollForward` nastavenym na `latestFeature`.
+Projekt obsahuje `global.json` s .NET SDK `8.0.124` a `rollForward` nastaveným na `latestFeature`.
 
 ## Instalace
 
@@ -118,11 +118,11 @@ cd ReactWeb
 npm install
 ```
 
-## Spusteni
+## Spuštění
 
-### Desktopova aplikace
+### Desktopová aplikace
 
-Z korene repozitare:
+Z kořene repozitáře:
 
 ```powershell
 dotnet run --project SkalaView.Desktop
@@ -135,7 +135,7 @@ cd ReactWeb
 npm run dev
 ```
 
-Vite vypise lokalni adresu, typicky:
+Vite vypíše lokální adresu, typicky:
 
 ```text
 http://localhost:5173/
@@ -143,24 +143,24 @@ http://localhost:5173/
 
 ## Build
 
-Build celeho .NET reseni:
+Build celého .NET řešení:
 
 ```powershell
 dotnet build SkalaView.sln
 ```
 
-Build webove verze:
+Build webové verze:
 
 ```powershell
 cd ReactWeb
 npm run build
 ```
 
-`npm run build` nejdrive publikuje `SkalaView.Browser`, zkopiruje Avalonia browser bundle do `ReactWeb/public/avalonia` a potom spusti produkcni Vite build.
+`npm run build` nejdříve publikuje `SkalaView.Browser`, zkopíruje Avalonia browser bundle do `ReactWeb/public/avalonia` a potom spustí produkční Vite build.
 
-## Poznamky
+## Poznámky
 
-- API token se neuklada do repozitare ani do konfiguracnich souboru.
-- Watchlist se spravuje pres backend, ne pres lokalni soubory v klientovi.
-- `bin/`, `obj/`, `node_modules/`, `dist/`, `.idea/`, `.vs/` a publish vystupy jsou ignorovane.
-- `ReactWeb/public/avalonia` obsahuje webovy Avalonia bundle, ktery React host nacita jako staticka aktiva.
+- API token se neukládá do repozitáře ani do konfiguračních souborů.
+- Watchlist se spravuje přes backend, ne přes lokální soubory v klientovi.
+- `bin/`, `obj/`, `node_modules/`, `dist/`, `.idea/`, `.vs/` a publish výstupy jsou ignorované.
+- `ReactWeb/public/avalonia` obsahuje webový Avalonia bundle, který React host načítá jako statická aktiva.
